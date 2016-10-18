@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use App\Task;
 
 class CreateTasksTable extends Migration
 {
@@ -19,6 +20,18 @@ class CreateTasksTable extends Migration
             $table->boolean('done');
             $table->timestamps();
         });
+
+        Task::create([
+            'task' => 'Weekend hookup',
+            'description' => 'Call Helga in the afternoon',
+            'done' => false,
+        ]);
+
+        Task::create([
+            'task' => 'Late night coding',
+            'description' => 'Finishing coding POS API',
+            'done' => false,
+        ]);
     }
 
     /**
