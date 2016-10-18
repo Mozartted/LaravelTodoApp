@@ -3,7 +3,7 @@
  */
 $(document).ready(function(){
 
-    var url = "/LaravelTodo/public/tasks";
+    var url = "tasks";
 
     //display modal form for task editing
     $('.open-modal').click(function(){
@@ -60,6 +60,7 @@ $(document).ready(function(){
         var formData = {
             task: $('#task').val(),
             description: $('#description').val(),
+            done:0,
         }
 
         //used to determine the http verb to use [add=POST], [update=PUT]

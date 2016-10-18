@@ -10,6 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+use App\Task;
+use Response;
+use Illuminate\Http\Request;
+
 
 Route::get('/', function () {
     $tasks = Task::all();
