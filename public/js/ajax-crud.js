@@ -15,6 +15,7 @@ $(document).ready(function(){
             $('#task_id').val(data.id);
             $('#task').val(data.task);
             $('#description').val(data.description);
+            $('deadline').val(data.deadline);
             $('#btn-save').val("update");
 
             $('#myModal').modal('show');
@@ -60,6 +61,7 @@ $(document).ready(function(){
         var formData = {
             task: $('#task').val(),
             description: $('#description').val(),
+            deadline:$('#deadline').val(),
             done:0,
         }
 
@@ -86,7 +88,7 @@ $(document).ready(function(){
             success: function (data) {
                 console.log(data);
 
-                var task = '<tr id="task' + data.id + '"><td>' + data.id + '</td><td>' + data.task + '</td><td>' + data.description + '</td><td>' + data.created_at + '</td>';
+                var task = '<tr id="task' + data.id + '"><td>' + data.id + '</td><td>' + data.task + '</td><td>' + data.description + '</td><td>' + data.deadline + '</td><td>' + data.created_at + '</td>';
                 task += '<td><button class="btn btn-warning btn-xs btn-detail open-modal" value="' + data.id + '">Edit</button>';
                 task += '<button class="btn btn-danger btn-xs btn-delete delete-task" value="' + data.id + '">Delete</button></td></tr>';
 

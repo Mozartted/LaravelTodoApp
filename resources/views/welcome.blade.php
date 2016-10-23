@@ -19,6 +19,7 @@
                 <th>ID</th>
                 <th>Task</th>
                 <th>Description</th>
+                <th>Deadline</th>
                 <th>Date Created</th>
                 <th>Actions</th>
             </tr>
@@ -29,7 +30,12 @@
                     <td>{{$task->id}}</td>
                     <td>{{$task->task}}</td>
                     <td>{{$task->description}}</td>
-                    <td>{{$task->created_at}}</td>
+                    @if(!isset($task->deadline))
+                        <td>none</td>
+                    @else
+                        <td>{{$task->deadline}}</td>
+                    @endif
+                    <td>{{$task->created_at->diffForHumans()}}</td>
                     <td>
                         <button class="btn btn-warning btn-xs btn-detail open-modal" value="{{$task->id}}">Edit</button>
                         <button class="btn btn-danger btn-xs btn-delete delete-task" value="{{$task->id}}">Delete</button>
@@ -61,6 +67,12 @@
                                 <label for="inputEmail3" class="col-sm-3 control-label">Description</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="description" name="description" placeholder="Description" value="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="deadline" class="col-sm-3 control-label">Deadline</label>
+                                <div class="col-sm-9">
+                                    <input type="date" class="form-control" id="deadline" name="deadline">
                                 </div>
                             </div>
                         </form>
