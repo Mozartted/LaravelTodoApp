@@ -16,6 +16,7 @@
         <table class="table">
             <thead>
             <tr>
+                <th>Likes</th>
                 <th>ID</th>
                 <th>Task</th>
                 <th>Description</th>
@@ -27,6 +28,11 @@
             <tbody id="tasks-list" name="tasks-list">
             @foreach ($tasks as $task)
                 <tr id="task{{$task->id}}">
+                    @if(count($task->likes)>0)
+                    <td id="like{{$task->id}}"><form><a onclick="like({{$task->id}})" id="like" data-value="{{$task->id}}"><img style=" width: 17px; " src="{{asset('img/icons/pen.png')}}"></a></form><p id="number">{{count($task->likes)}}</p></td>
+                    @else
+                        <td id="like{{$task->id}}"><form><a id="like" onclick="like({{$task->id}})" data-value="{{$task->id}}"><img style=" width: 17px; " src="{{asset('img/icons/pen.png')}}"></a></form></td>
+                    @endif
                     <td>{{$task->id}}</td>
                     <td>{{$task->task}}</td>
                     <td>{{$task->description}}</td>

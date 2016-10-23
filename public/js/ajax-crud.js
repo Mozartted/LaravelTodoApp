@@ -1,6 +1,8 @@
 /**
  * Created by mozart on 10/18/16.
  */
+
+var url = "tasks";
 $(document).ready(function(){
 
     var url = "tasks";
@@ -47,6 +49,14 @@ $(document).ready(function(){
             }
         });
     });
+
+
+
+    $('like').click(
+        function (e){
+
+        }
+    );
 
     //create new task / update existing task
     $("#btn-save").click(function (e) {
@@ -109,3 +119,38 @@ $(document).ready(function(){
         });
     });
 });
+
+function like($task_id){
+    var task_id=$task_id;
+
+    var formData = {
+        task_id: task_id,
+    }
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    })
+
+    var type = "POST"; //for creating new resource
+    var my_url = url+'/like/'+task_id;
+
+    $.ajax({
+
+        type: type,
+        url: my_url,
+        data: formData,
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+
+            //<td id="like{{$task->id}}"><a id="like" data-value="{{$task->id}}"><img style=" width: 17px; " src="{{asset('img/icons/pen.png')}}"></a><p id="number">{{count($task->likes)}}</p></td>
+            var task = '<td id="like' + task_id + '"><form><a id="like" onclick="like('+task_id+')" data-value="'+ task_id+ '"><img style=" width: 17px; " src="img/icons/pen.png"></a></form><p id="number">'+ data.likes_number +'</p></td>';
+            $("#like" + task_id).replaceWith( task );
+        },
+        error: function (data) {
+            console.log('Error:', data);
+        }
+    });
+}

@@ -1,7 +1,5 @@
 <?php
 
-
-use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -14,6 +12,8 @@ use Carbon\Carbon;
 */
 use App\Task;
 use Illuminate\Http\Request;
+use App\Like;
+use Illuminate\Database\Eloquent\Collection;
 
 
 Route::get('/', function () {
@@ -42,6 +42,19 @@ Route::post('/tasks',function(Request $request){
     ];
 
     return Response::json($data);
+});
+
+//adding new like to a task
+Route::post('/tasks/like/{task}',function(Request $request,Task $task){
+    Like::create($request->all());
+
+    $tasklikes=count((array)$task->likes());
+    $likes=[
+        'likes_number'=>$tasklikes,
+    ];
+
+    return Response::json($likes);
+
 });
 
 Route::put('/tasks/{task_id}',function(Request $request,$task_id){
